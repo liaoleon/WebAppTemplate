@@ -38,11 +38,11 @@ namespace WebAppTemplate.Repo
             }
         }
 
-        public List<Orders> GetAll()
+        public IQueryable<Orders> GetAll()
         {
             using (var db = new NorthwindEntities())
             {
-                return db.Orders.ToList();
+                return db.Orders;
             }
         }
     }

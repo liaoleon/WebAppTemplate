@@ -34,7 +34,7 @@ namespace WebAppTemplate.Service
 
         public List<Orders> GetAll()
         {
-            return _orderRepo.GetAll();
+            return _orderRepo.GetAll().ToList();
         }
     }
 }

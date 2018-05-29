@@ -9,7 +9,7 @@ namespace WebAppTemplate.Repo.Interface
 {
     public interface IOrderRepo
     {
-        List<Orders> GetAll();
+        IQueryable<Orders> GetAll();
         void Add(Orders model);
         void Update(Orders model);
         void Delete(int id);
