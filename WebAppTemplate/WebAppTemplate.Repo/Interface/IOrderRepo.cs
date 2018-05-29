@@ -11,7 +11,7 @@ namespace WebAppTemplate.Repo.Interface
     {
         List<Orders> GetAll();
         void Add(Orders model);
-        void Edit(Orders model);
+        void Update(Orders model);
         void Delete(int id);
     }
 }

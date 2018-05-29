@@ -8,7 +8,7 @@ using WebAppTemplate.Repo.Interface;
 
 namespace WebAppTemplate.Repo
 {
-    class OrderRepo : IOrderRepo
+    public class OrderRepo : IOrderRepo
     {
         public void Add(Orders model)
         {
@@ -28,7 +28,7 @@ namespace WebAppTemplate.Repo
             }
         }
 
-        public void Edit(Orders model)
+        public void Update(Orders model)
         {
             using (var db = new NorthwindEntities())
             {

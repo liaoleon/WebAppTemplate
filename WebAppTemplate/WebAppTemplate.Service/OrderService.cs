@@ -27,9 +27,9 @@ namespace WebAppTemplate.Service
             _orderRepo.Delete(id);
         }
 
-        public void Edit(Orders model)
+        public void Update(Orders model)
         {
-            _orderRepo.Edit(model);
+            _orderRepo.Update(model);
         }
 
         public List<Orders> GetAll()

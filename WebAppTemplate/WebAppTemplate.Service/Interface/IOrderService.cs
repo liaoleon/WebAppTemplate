@@ -7,11 +7,11 @@ using WebAppTemplate.Repo;
 
 namespace WebAppTemplate.Service.Interface
 {
-    interface IOrderService
+    public interface IOrderService
     {
         List<Orders> GetAll();
         void Add(Orders model);
-        void Edit(Orders model);
+        void Update(Orders model);
         void Delete(int id);
 
     }
