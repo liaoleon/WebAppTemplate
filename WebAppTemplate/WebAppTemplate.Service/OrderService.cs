@@ -19,6 +19,8 @@ namespace WebAppTemplate.Service
 
         public void Add(Orders model)
         {
+            model.CustomerID = "ALFKI";
+            model.EmployeeID = 1;
             _orderRepo.Add(model);
         }
 
@@ -27,14 +29,19 @@ namespace WebAppTemplate.Service
             _orderRepo.Delete(id);
         }
 
-        public void Update(Orders model)
+        public void Edit(Orders model)
         {
-            _orderRepo.Update(model);
+            _orderRepo.Edit(model);
         }
 
         public List<Orders> GetAll()
         {
-            return _orderRepo.GetAll().ToList();
+            return _orderRepo.GetAll();
+        }
+
+        public Orders GetByID(int OrderID)
+        {
+            return _orderRepo.GetByID(OrderID);
         }
     }
 }

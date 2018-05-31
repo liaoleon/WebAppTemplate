@@ -21,7 +21,7 @@ namespace WebAppTemplate.Controllers
         // GET: Order
         public ActionResult Index()
         {  
-            var viewModel = Mapper.Instance.Map<List<Orders>, List<OrderViewModel>>(_orderService.GetAll());
+            var viewModel = Mapper.Map<List<Orders>, List<OrderViewModel>>(_orderService.GetAll());
             return View(viewModel);
         }
 
@@ -39,12 +39,16 @@ namespace WebAppTemplate.Controllers
 
         // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(OrderViewModel viewModel)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                if (ModelState.IsValid == false)
+                {
+                    return View(viewModel);
+                }
+                var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
+                _orderService.Add(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -54,19 +58,29 @@ namespace WebAppTemplate.Controllers
         }
 
         // GET: Order/Edit/5
-        public ActionResult Update(int id)
+        public ActionResult edit(int OrderID)
         {
-            return View();
+            var order = _orderService.GetByID(OrderID);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = Mapper.Map<Orders, OrderViewModel>(order);
+            return View(viewModel);
         }
 
         // POST: Order/Edit/5
         [HttpPost]
-        public ActionResult Update(int id, FormCollection collection)
+        public ActionResult edit(OrderViewModel viewModel)
         {
             try
             {
-                // TODO: Add update logic here
-
+                if (ModelState.IsValid == false)
+                {
+                    return View(viewModel);
+                }
+                var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
+                _orderService.Edit(model);
                 return RedirectToAction("Index");
             }
             catch
