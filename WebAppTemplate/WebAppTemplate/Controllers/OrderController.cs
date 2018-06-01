@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using WebAppTemplate.Repo;
+using WebAppTemplate.Repo.Interface;
 using WebAppTemplate.Service;
 using WebAppTemplate.Service.Interface;
 using WebAppTemplate.ViewModels;
@@ -14,10 +15,11 @@ namespace WebAppTemplate.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
-
+        private IUnitOfWork _unitOfWork;
         public OrderController() {
             var db = new NorthwindEntities();
-            _orderService = new OrderService(new OrderRepo(new UnitOfWork(db)));
+            _unitOfWork = new UnitOfWork(db);
+            _orderService = new OrderService(new OrderRepo(_unitOfWork));
         }
         // GET: Order
         public ActionResult Index()
@@ -50,6 +52,7 @@ namespace WebAppTemplate.Controllers
                 }
                 var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
                 _orderService.Add(model);
+                _unitOfWork.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -59,7 +62,7 @@ namespace WebAppTemplate.Controllers
         }
 
         // GET: Order/Edit/5
-        public ActionResult edit(int OrderID)
+        public ActionResult Edit(int OrderID)
         {
             var order = _orderService.GetByID(OrderID);
             if (order == null)
@@ -72,7 +75,7 @@ namespace WebAppTemplate.Controllers
 
         // POST: Order/Edit/5
         [HttpPost]
-        public ActionResult edit(OrderViewModel viewModel)
+        public ActionResult Edit(OrderViewModel viewModel)
         {
             try
             {
@@ -82,6 +85,7 @@ namespace WebAppTemplate.Controllers
                 }
                 var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
                 _orderService.Edit(model);
+                _unitOfWork.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -110,6 +114,7 @@ namespace WebAppTemplate.Controllers
             try
             {
                 _orderService.Delete(OrderID);
+                _unitOfWork.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
