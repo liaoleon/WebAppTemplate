@@ -24,6 +24,7 @@ namespace WebAppTemplate
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapdatetimepicker").Include(
+                     "~/Scripts/moment.min.js",
                      "~/Scripts/bootstrap-datetimepicker.min.js",
                      "~/Scripts/dateTimeHelper.js"));
 

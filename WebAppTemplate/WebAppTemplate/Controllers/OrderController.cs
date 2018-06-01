@@ -90,19 +90,25 @@ namespace WebAppTemplate.Controllers
         }
 
         // GET: Order/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int OrderID)
         {
-            return View();
+            var order = _orderService.GetByID(OrderID);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = Mapper.Map<Orders, OrderViewModel>(order);
+            return View(viewModel);
         }
 
         // POST: Order/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult DeleteData(int OrderID)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                _orderService.Delete(OrderID);
                 return RedirectToAction("Index");
             }
             catch

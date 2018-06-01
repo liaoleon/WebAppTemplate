@@ -22,8 +22,9 @@ namespace WebAppTemplate.Repo
         {
             var order = _db.Orders.Find(id);
             _db.Orders.Remove(order);
+            var orderDetail = _db.Order_Details.Where(x => x.OrderID == id);
+            _db.Order_Details.RemoveRange(orderDetail);
             _db.SaveChanges();
-
         }
 
         public void Edit(Orders model)
