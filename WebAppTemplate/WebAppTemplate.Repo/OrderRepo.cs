@@ -11,37 +11,42 @@ namespace WebAppTemplate.Repo
 {
     public class OrderRepo : IOrderRepo
     {
-        private readonly NorthwindEntities _db = new NorthwindEntities();
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly DbSet<Orders> _dbOrder;
+        private readonly DbSet<Order_Details> _dbOrderDetails;
+
+        public OrderRepo(IUnitOfWork unitOfWork) {
+            _unitOfWork = unitOfWork;
+            _dbOrder = _unitOfWork.DataBaseContext.Set<Orders>();
+            _dbOrderDetails = _unitOfWork.DataBaseContext.Set<Order_Details>();
+        }
         public void Add(Orders model)
         {
-            _db.Orders.Add(model);
-            _db.SaveChanges();
+            _dbOrder.Add(model);
         }
 
         public void Delete(int id)
         {
-            var order = _db.Orders.Find(id);
-            _db.Orders.Remove(order);
-            var orderDetail = _db.Order_Details.Where(x => x.OrderID == id);
-            _db.Order_Details.RemoveRange(orderDetail);
-            _db.SaveChanges();
+            var order = _dbOrder.Find(id);
+            _dbOrder.Remove(order);
+            var orderDetail = _dbOrderDetails.Where(x => x.OrderID == id);
+            _dbOrderDetails.RemoveRange(orderDetail);
         }
 
         public void Edit(Orders model)
         {
-            _db.Entry(model).State = EntityState.Modified;
-            _db.SaveChanges();
+            _unitOfWork.DataBaseContext.Entry(model).State = EntityState.Modified;
 
         }
 
-        public List<Orders> GetAll()
+        public IQueryable<Orders> GetAll()
         {
-            return _db.Orders.Take(30).ToList();
+            return _dbOrder;
         }
 
         public Orders GetByID(int OrderID)
         {
-            return _db.Orders.Find(OrderID);
+            return _dbOrder.Find(OrderID);
         }
     }
 }

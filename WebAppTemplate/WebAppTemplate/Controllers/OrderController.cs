@@ -16,7 +16,8 @@ namespace WebAppTemplate.Controllers
         private readonly IOrderService _orderService;
 
         public OrderController() {
-            _orderService = new OrderService(new OrderRepo());
+            var db = new NorthwindEntities();
+            _orderService = new OrderService(new OrderRepo(new UnitOfWork(db)));
         }
         // GET: Order
         public ActionResult Index()
