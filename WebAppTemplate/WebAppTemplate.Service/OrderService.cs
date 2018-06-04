@@ -36,7 +36,7 @@ namespace WebAppTemplate.Service
 
         public List<Orders> GetAll()
         {
-            return _orderRepo.GetAll().ToList();
+            return _orderRepo.GetAll().Take(30).ToList();
         }
 
         public Orders GetByID(int OrderID)
