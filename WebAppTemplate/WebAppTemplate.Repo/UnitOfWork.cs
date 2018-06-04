@@ -8,37 +8,17 @@ using WebAppTemplate.Repo.Interface;
 
 namespace WebAppTemplate.Repo
 {
-
-    /// <summary>
-    /// Class UnitOfWork.
-    /// </summary>
-    /// <seealso cref="YCRCPracticeWebApp.Repository.Interface.IUnitOfWork" />
     public class UnitOfWork : IUnitOfWork
     {
-        /// <summary>
-        /// The disposed
-        /// </summary>
         private bool disposed = false;
 
-        /// <summary>
-        /// Gets or sets the data base context.
-        /// </summary>
-        /// <value>The data base context.</value>
         public DbContext DataBaseContext { get; set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
-        /// </summary>
-        /// <param name="dbContext">The database context.</param>
         public UnitOfWork(DbContext dbContext)
         {
             this.DataBaseContext = dbContext;
         }
 
-        /// <summary>
-        /// Saves the changes.
-        /// </summary>
-        /// <returns>System.Int32.</returns>
         public int SaveChanges()
         {
             return this.DataBaseContext.SaveChanges();

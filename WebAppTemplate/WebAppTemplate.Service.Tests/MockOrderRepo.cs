@@ -8,21 +8,21 @@ using WebAppTemplate.Repo.Interface;
 
 namespace WebAppTemplate.Service.Tests
 {
-    public class IMockOrderRepo : IOrderRepo
+    public class MockOrderRepo : IOrderRepo
     {
         public void Add(Orders model)
         {
-            throw new NotImplementedException();
+          
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+          
         }
 
         public void Edit(Orders model)
         {
-            throw new NotImplementedException();
+          
         }
 
         public IQueryable<Orders> GetAll()
@@ -37,7 +37,7 @@ namespace WebAppTemplate.Service.Tests
 
         public Orders GetByID(int OrderID)
         {
-            throw new NotImplementedException();
+            return new Orders();
         }
     }
 }

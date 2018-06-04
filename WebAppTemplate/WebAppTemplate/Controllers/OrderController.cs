@@ -53,6 +53,7 @@ namespace WebAppTemplate.Controllers
                 var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
                 _orderService.Add(model);
                 _unitOfWork.SaveChanges();
+                _unitOfWork.Dispose();
                 return RedirectToAction("Index");
             }
             catch
@@ -86,6 +87,7 @@ namespace WebAppTemplate.Controllers
                 var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
                 _orderService.Edit(model);
                 _unitOfWork.SaveChanges();
+                _unitOfWork.Dispose();
                 return RedirectToAction("Index");
             }
             catch
@@ -115,6 +117,7 @@ namespace WebAppTemplate.Controllers
             {
                 _orderService.Delete(OrderID);
                 _unitOfWork.SaveChanges();
+                _unitOfWork.Dispose();
                 return RedirectToAction("Index");
             }
             catch

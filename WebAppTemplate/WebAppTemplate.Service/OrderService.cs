@@ -19,18 +19,27 @@ namespace WebAppTemplate.Service
 
         public void Add(Orders model)
         {
+            if (model == null) {
+                throw new ArgumentNullException(nameof(model));
+            }
             model.CustomerID = "ALFKI";
             model.EmployeeID = 1;
             _orderRepo.Add(model);
         }
 
-        public void Delete(int id)
+        public void Delete(int OrderID)
         {
-            _orderRepo.Delete(id);
+            if (OrderID < 0) {
+                throw new ArgumentOutOfRangeException(nameof(OrderID));
+            }
+            _orderRepo.Delete(OrderID);
         }
 
         public void Edit(Orders model)
         {
+            if (model == null) {
+                throw new ArgumentNullException(nameof(model));
+            }
             _orderRepo.Edit(model);
         }
 
@@ -41,6 +50,9 @@ namespace WebAppTemplate.Service
 
         public Orders GetByID(int OrderID)
         {
+            if (OrderID < 0) {
+                throw new ArgumentOutOfRangeException(nameof(OrderID));
+            }
             return _orderRepo.GetByID(OrderID);
         }
     }
