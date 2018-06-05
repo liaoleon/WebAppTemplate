@@ -12,9 +12,11 @@ namespace WebAppTemplate.Service
     public class OrderService : IOrderService
     {
         private readonly IOrderRepo _orderRepo;
-        public OrderService(IOrderRepo orderRepo)
+        private readonly IOrder_DetailsRepo _order_DetailsRepo;
+        public OrderService(IOrderRepo orderRepo, IOrder_DetailsRepo order_DetailsRepo)
         {
             _orderRepo = orderRepo;
+            _order_DetailsRepo = order_DetailsRepo;
         }
 
         public void Add(Orders model)
@@ -34,6 +36,8 @@ namespace WebAppTemplate.Service
             }
             var order = _orderRepo.Find(OrderID);
             _orderRepo.Delete(order);
+            var orderDetail = _order_DetailsRepo.Where(x => x.OrderID == OrderID);
+            _order_DetailsRepo.RemoveRange(orderDetail);
         }
 
         public void Edit(Orders model)
@@ -46,7 +50,7 @@ namespace WebAppTemplate.Service
 
         public List<Orders> GetAll()
         {
-            return _orderRepo.GetAll().Take(30).ToList();
+            return _orderRepo.GetAll().OrderByDescending(x=>x.OrderID).Take(30).ToList();
         }
 
         public Orders GetByID(int OrderID)

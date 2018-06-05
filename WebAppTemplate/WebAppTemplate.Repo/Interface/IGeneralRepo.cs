@@ -12,6 +12,7 @@ namespace WebAppTemplate.Repo.Interface
 
         void Delete(TEntity model);
 
+        void RemoveRange(IEnumerable<TEntity> entities);
         TEntity Find(params object[] keyValues);
 
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);

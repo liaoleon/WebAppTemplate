@@ -9,6 +9,5 @@ namespace WebAppTemplate.Repo.Interface
 {
     public interface IOrderRepo : IGeneralRepo<Orders>
     {
-    
     }
 }

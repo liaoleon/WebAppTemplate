@@ -19,7 +19,7 @@ namespace WebAppTemplate.Controllers
         public OrderController() {
             var db = new NorthwindEntities();
             _unitOfWork = new UnitOfWork(db);
-            _orderService = new OrderService(new OrderRepo(_unitOfWork));
+            _orderService = new OrderService(new OrderRepo(_unitOfWork),new Order_DetailsRepo(_unitOfWork));
         }
         // GET: Order
         public ActionResult Index()

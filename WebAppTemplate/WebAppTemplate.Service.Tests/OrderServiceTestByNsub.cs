@@ -12,17 +12,19 @@ namespace WebAppTemplate.Service.Tests
     [TestClass]
     public class OrderServiceTest
     {
-        private IOrderRepo _NsubRepo;
+        private IOrderRepo _orderRepo;
+        private IOrder_DetailsRepo _orders_DetailsRepo;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _NsubRepo = Substitute.For<IOrderRepo>();
+            _orderRepo = Substitute.For<IOrderRepo>();
+            _orders_DetailsRepo = Substitute.For<IOrder_DetailsRepo>();
         }
 
-        private OrderService GetSystemUnderTestByNsub()
+        private OrderService GetSystemUnderTest()
         {
-            return new OrderService(_NsubRepo);
+            return new OrderService(_orderRepo,_orders_DetailsRepo);
         }
 
         [TestMethod]
@@ -33,9 +35,9 @@ namespace WebAppTemplate.Service.Tests
 
             Fixture f = new Fixture();
             var source=f.Build<Orders>().OmitAutoProperties().CreateMany(30).AsQueryable();
-            _NsubRepo.GetAll().Returns(source);
+            _orderRepo.GetAll().Returns(source);
 
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             var actual = sut.GetAll().Count;
             //assert
@@ -48,7 +50,7 @@ namespace WebAppTemplate.Service.Tests
             //arrange 
             Fixture f = new Fixture();
             var source = f.Build<Orders>().OmitAutoProperties().Create();
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.Add(source);
             //assert
@@ -60,7 +62,7 @@ namespace WebAppTemplate.Service.Tests
         {
             //arrange
             Orders source = null;
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.Add(source);
             //assert
@@ -73,7 +75,7 @@ namespace WebAppTemplate.Service.Tests
             //arrange 
             Fixture f = new Fixture();
             var source = f.Build<Orders>().OmitAutoProperties().Create();
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.Edit(source);
             //assert
@@ -85,7 +87,7 @@ namespace WebAppTemplate.Service.Tests
         {
             //arrange 
             Orders source = null;
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.Edit(source);
             //assert
@@ -99,7 +101,7 @@ namespace WebAppTemplate.Service.Tests
             Fixture f = new Fixture();
             f.Customizations.Add(new RandomNumericSequenceGenerator(0, int.MaxValue));
             var source = f.Create<int>();
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.Delete(source);
             //assert
@@ -113,7 +115,7 @@ namespace WebAppTemplate.Service.Tests
             Fixture f = new Fixture();
             f.Customizations.Add(new RandomNumericSequenceGenerator(int.MinValue, 0));
             var source = f.Create<int>();
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.Delete(source);
             //assert
@@ -127,7 +129,7 @@ namespace WebAppTemplate.Service.Tests
             Fixture f = new Fixture();
             f.Customizations.Add(new RandomNumericSequenceGenerator(0, int.MaxValue));
             var source = f.Create<int>();
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.GetByID(source);
             //assert
@@ -141,7 +143,7 @@ namespace WebAppTemplate.Service.Tests
             Fixture f = new Fixture();
             f.Customizations.Add(new RandomNumericSequenceGenerator(int.MinValue, 0));
             var source = f.Create<int>();
-            var sut = GetSystemUnderTestByNsub();
+            var sut = GetSystemUnderTest();
             //act
             Action action = () => sut.GetByID(source);
             //assert
