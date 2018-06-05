@@ -63,7 +63,7 @@
     <Compile Include="Employees.cs">
       <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
-    <Compile Include="GeneralRepo.cs" />
+    <Compile Include="Repo\GeneralRepo.cs" />
     <Compile Include="Interface\IGeneralRepo.cs" />
     <Compile Include="Interface\IOrderRepo.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
@@ -82,7 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Northwind.edmx</DependentUpon>
     </Compile>
-    <Compile Include="OrderRepo.cs" />
+    <Compile Include="Repo\OrderRepo.cs" />
     <Compile Include="Orders.cs">
       <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
@@ -105,7 +105,7 @@
     <Compile Include="Territories.cs">
       <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Repo\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
