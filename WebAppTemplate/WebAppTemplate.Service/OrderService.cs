@@ -32,7 +32,8 @@ namespace WebAppTemplate.Service
             if (OrderID < 0) {
                 throw new ArgumentOutOfRangeException(nameof(OrderID));
             }
-            _orderRepo.Delete(OrderID);
+            var order = _orderRepo.Find(OrderID);
+            _orderRepo.Delete(order);
         }
 
         public void Edit(Orders model)
@@ -40,7 +41,7 @@ namespace WebAppTemplate.Service
             if (model == null) {
                 throw new ArgumentNullException(nameof(model));
             }
-            _orderRepo.Edit(model);
+            _orderRepo.Update(model);
         }
 
         public List<Orders> GetAll()
@@ -53,7 +54,7 @@ namespace WebAppTemplate.Service
             if (OrderID < 0) {
                 throw new ArgumentOutOfRangeException(nameof(OrderID));
             }
-            return _orderRepo.GetByID(OrderID);
+            return _orderRepo.Find(OrderID);
         }
     }
 }

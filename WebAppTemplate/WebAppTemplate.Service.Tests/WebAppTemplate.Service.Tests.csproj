@@ -84,8 +84,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MockOrderRepo.cs" />
-    <Compile Include="OrderServiceTest.cs" />
+    <Compile Include="OrderServiceTestByNsub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebAppTemplate.Repo.Interface;
 
-namespace WebAppTemplate.Repo.Interface
+namespace WebAppTemplate.Service.Tests
 {
-    public interface IOrderRepo : IGeneralRepo<Orders>
+    class MockGeneralRepo : IGeneralRepo<>
     {
-    
     }
 }

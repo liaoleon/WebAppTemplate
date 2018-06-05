@@ -63,6 +63,8 @@
     <Compile Include="Employees.cs">
       <DependentUpon>Northwind.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeneralRepo.cs" />
+    <Compile Include="Interface\IGeneralRepo.cs" />
     <Compile Include="Interface\IOrderRepo.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
     <Compile Include="Northwind.Context.cs">

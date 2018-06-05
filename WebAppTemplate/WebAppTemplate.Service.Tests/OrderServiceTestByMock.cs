@@ -10,7 +10,7 @@ using WebAppTemplate.Repo.Interface;
 namespace WebAppTemplate.Service.Tests
 {
     [TestClass]
-    public class OrderServiceTest
+    public class OrderServiceTestByMock
     {
         private IOrderRepo _mockRepo;
         private IOrderRepo _NsubRepo;
@@ -18,14 +18,14 @@ namespace WebAppTemplate.Service.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            _mockRepo = new MockOrderRepo();
+            //_mockRepo = new MockOrderRepo();
             _NsubRepo = Substitute.For<IOrderRepo>();
         }
 
-        private OrderService GetSystemUnderTestByMock()
-        {
-            return new OrderService(_mockRepo);
-        }
+        //private OrderService GetSystemUnderTestByMock()
+        //{
+        //    return new OrderService(_mockRepo);
+        //}
 
         private OrderService GetSystemUnderTestByNsub()
         {
