@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using WebAppTemplate.ActionFilter;
 using WebAppTemplate.Repo;
 using WebAppTemplate.Repo.Interface;
 using WebAppTemplate.Service;
@@ -43,6 +44,7 @@ namespace WebAppTemplate.Controllers
 
         // POST: Order/Create
         [HttpPost]
+        [TransactionEvent]
         public ActionResult Create(OrderViewModel viewModel)
         {
             try
@@ -77,6 +79,7 @@ namespace WebAppTemplate.Controllers
 
         // POST: Order/Edit/5
         [HttpPost]
+        [TransactionEvent]
         public ActionResult Edit(OrderViewModel viewModel)
         {
             try
@@ -112,6 +115,7 @@ namespace WebAppTemplate.Controllers
         // POST: Order/Delete/5
         [HttpPost]
         [ActionName("Delete")]
+        [TransactionEvent]
         public ActionResult DeleteData(int OrderID)
         {
             try

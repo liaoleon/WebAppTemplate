@@ -55,7 +55,7 @@ namespace WebAppTemplate
             // Service
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
-            container.RegisterType<DbContext, NorthwindEntities>();
+            container.RegisterType<DbContext, NorthwindEntities>(new PerRequestLifetimeManager());
            
         }
     }
