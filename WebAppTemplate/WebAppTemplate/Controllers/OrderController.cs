@@ -15,11 +15,12 @@ namespace WebAppTemplate.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
-        private IUnitOfWork _unitOfWork;
-        public OrderController() {
-            var db = new NorthwindEntities();
-            _unitOfWork = new UnitOfWork(db);
-            _orderService = new OrderService(new OrderRepo(_unitOfWork),new Order_DetailsRepo(_unitOfWork));
+        //private IUnitOfWork _unitOfWork;
+        public OrderController(IOrderService orderService) {
+            _orderService = orderService;
+            //var db = new NorthwindEntities();
+            //_unitOfWork = new UnitOfWork(db);
+            //_orderService = new OrderService(new OrderRepo(_unitOfWork),new Order_DetailsRepo(_unitOfWork));
         }
         // GET: Order
         public ActionResult Index()
@@ -52,8 +53,8 @@ namespace WebAppTemplate.Controllers
                 }
                 var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
                 _orderService.Add(model);
-                _unitOfWork.SaveChanges();
-                _unitOfWork.Dispose();
+                //_unitOfWork.SaveChanges();
+                //_unitOfWork.Dispose();
                 return RedirectToAction("Index");
             }
             catch
@@ -86,8 +87,8 @@ namespace WebAppTemplate.Controllers
                 }
                 var model = Mapper.Map<OrderViewModel, Orders>(viewModel);
                 _orderService.Edit(model);
-                _unitOfWork.SaveChanges();
-                _unitOfWork.Dispose();
+                //_unitOfWork.SaveChanges();
+                //_unitOfWork.Dispose();
                 return RedirectToAction("Index");
             }
             catch
@@ -116,8 +117,8 @@ namespace WebAppTemplate.Controllers
             try
             {
                 _orderService.Delete(OrderID);
-                _unitOfWork.SaveChanges();
-                _unitOfWork.Dispose();
+                //_unitOfWork.SaveChanges();
+                //_unitOfWork.Dispose();
                 return RedirectToAction("Index");
             }
             catch
