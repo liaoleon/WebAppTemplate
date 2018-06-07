@@ -2,7 +2,9 @@
 ## 使用套件
 * AutoMapper - 自動轉換model
 
-* EntityFramework - 資料存取
+* Entity Framework - 資料存取
+
+* Unity Framework - 自動DI 
 ### Unit Test
 * AutoFixture - 自動產生測試資料
 
