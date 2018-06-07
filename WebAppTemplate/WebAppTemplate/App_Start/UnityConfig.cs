@@ -1,7 +1,10 @@
 using System;
 using System.Data.Entity;
+using System.Linq;
 using Unity;
 using Unity.AspNet.Mvc;
+using Unity.Lifetime;
+using Unity.RegistrationByConvention;
 using WebAppTemplate.Repo;
 using WebAppTemplate.Repo.Interface;
 using WebAppTemplate.Service;
@@ -49,12 +52,21 @@ namespace WebAppTemplate
             // container.RegisterType<IProductRepository, ProductRepository>();
 
             // Repository
-            container.RegisterType<IOrderRepo, OrderRepo>();
-            container.RegisterType<IOrder_DetailsRepo, Order_DetailsRepo>();
+            //container.RegisterType<IOrderRepo, OrderRepo>();
+            //container.RegisterType<IOrder_DetailsRepo, Order_DetailsRepo>();
 
-            // Service
-            container.RegisterType<IOrderService, OrderService>();
-            container.RegisterType<IUnitOfWork, UnitOfWork>();
+            ////// Service
+            //container.RegisterType<IOrderService, OrderService>();
+            //container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterTypes
+            (
+              types: AllClasses.FromLoadedAssemblies().Where(x => x.Namespace.Contains("WebAppTemplate")),
+              getFromTypes: WithMappings.FromMatchingInterface,
+              getName: WithName.Default,
+              getLifetimeManager: WithLifetime.Custom<TransientLifetimeManager>,
+              getInjectionMembers: null,
+              overwriteExistingMappings: true
+            );
             container.RegisterType<DbContext, NorthwindEntities>(new PerRequestLifetimeManager());
            
         }
