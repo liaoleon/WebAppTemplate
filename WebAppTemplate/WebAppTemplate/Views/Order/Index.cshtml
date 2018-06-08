@@ -102,7 +102,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { OrderID = item.OrderID }) |
-            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+            @Html.ActionLink("Details", "Details", new { OrderID = item.OrderID }) |
             @Html.ActionLink("Delete", "Delete", new { OrderID = item.OrderID })
         </td>
     </tr>

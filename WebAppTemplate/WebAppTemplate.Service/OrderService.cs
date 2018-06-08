@@ -60,5 +60,14 @@ namespace WebAppTemplate.Service
             }
             return _orderRepo.Find(OrderID);
         }
+
+        public List<Order_Details> GetDetails(int OrderID)
+        {
+            if (OrderID < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(OrderID));
+            }
+            return _order_DetailsRepo.Where(x => x.OrderID == OrderID).ToList();
+        }
     }
 }

@@ -31,9 +31,15 @@ namespace WebAppTemplate.Controllers
         }
 
         // GET: Order/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int OrderID)
         {
-            return View();
+            var orderDetails = _orderService.GetDetails(OrderID);
+            if (orderDetails == null)
+            {
+                return HttpNotFound();
+            }
+            var model = Mapper.Map<List<Order_Details>, List<OrderDetailsViewModel>>(orderDetails);
+            return View(model);
         }
 
         // GET: Order/Create

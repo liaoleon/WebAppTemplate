@@ -22,6 +22,8 @@ namespace WebAppTemplate
         public WebProfile() {
             CreateMap<OrderViewModel, Orders>();
             CreateMap<Orders, OrderViewModel>();
+            CreateMap<OrderDetailsViewModel, Order_Details>();
+            CreateMap<Order_Details, OrderDetailsViewModel>();
         }
     }
 }

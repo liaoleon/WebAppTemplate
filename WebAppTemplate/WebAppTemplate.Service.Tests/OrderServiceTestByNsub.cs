@@ -149,5 +149,33 @@ namespace WebAppTemplate.Service.Tests
             //assert
             action.Should().Throw<ArgumentOutOfRangeException>();
         }
+
+        [TestMethod]
+        public void GetDetails_取得特定資料_應無例外_byNsub()
+        {
+            //arrange 
+            Fixture f = new Fixture();
+            f.Customizations.Add(new RandomNumericSequenceGenerator(0, int.MaxValue));
+            var source = f.Create<int>();
+            var sut = GetSystemUnderTest();
+            //act
+            Action action = () => sut.GetDetails(source);
+            //assert
+            action.Should().NotThrow<Exception>();
+        }
+
+        [TestMethod]
+        public void GetDetails_取得特定資料_應出現例外_byNsub()
+        {
+            //arrange 
+            Fixture f = new Fixture();
+            f.Customizations.Add(new RandomNumericSequenceGenerator(int.MinValue, 0));
+            var source = f.Create<int>();
+            var sut = GetSystemUnderTest();
+            //act
+            Action action = () => sut.GetDetails(source);
+            //assert
+            action.Should().Throw<ArgumentOutOfRangeException>();
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace WebAppTemplate.Service.Interface
     {
         List<Orders> GetAll();
         Orders GetByID(int OrderID);
+        List<Order_Details> GetDetails(int OrderID);
         void Add(Orders model);
         void Edit(Orders model);
         void Delete(int id);
